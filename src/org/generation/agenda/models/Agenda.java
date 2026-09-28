@@ -12,6 +12,10 @@ public class Agenda {
         this.misContactos = new TreeMap<String, Contacto>();
     }
 
+    public void eliminarContacto(String numero) {
+        misContactos.remove(numero);
+        System.out.println(String.format("Se elimino el contacto %s", numero));
+    }
     public Boolean agendaLlena () {
         if (misContactos.size() == MAX_SIZE) {
             System.out.println("No hay espacio disponible para nuevos contactos.");
