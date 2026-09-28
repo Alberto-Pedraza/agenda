@@ -46,10 +46,10 @@ public class Agenda {
     //Apertura de metodo listar contactos
     public void listarContactos() {
         System.out.println("LISTA DE CONTACTOS (ORDENADOS DE LA A - Z)");
-        if(contactos.isEmpty()){
+        if(misContactos.isEmpty()){
             System.out.println("La agenda esta vacía");
         } else {
-            for (Contacto c : contactos.value()){
+            for (Contacto c : misContactos.value()){
                 System.out.println(c);
             }
         }
