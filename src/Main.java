@@ -174,6 +174,31 @@ public class Main {
                     break;
 
                 // =========================================
+                // OPCIÓN 4: BUSCAR CONTACTO
+                // =========================================
+                case 4:
+                    String nombreBuscar = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas buscar:");
+
+                    if (nombreBuscar == null || nombreBuscar.trim().isEmpty()) {
+                        break;
+                    }
+
+                    String telefonoEncontrado = agenda.buscarContacto(nombreBuscar);
+
+                    if (telefonoEncontrado != null) {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "El teléfono de " + nombreBuscar + " es: " + telefonoEncontrado
+                        );
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "No se encontró ningún contacto con el nombre: " + nombreBuscar
+                        );
+                    }
+                    break;
+
+                // =========================================
                 // OPCIÓN 8: SALIR
                 // =========================================
                 case 8:
