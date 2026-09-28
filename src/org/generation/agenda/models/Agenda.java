@@ -7,18 +7,18 @@ import java.util.TreeMap;
 
 public class Agenda {
     // El TreeMap usa el 'número' (String) como Clave única, y el objeto 'Contacto' como Valor
-    private TreeMap<String, Contacto>  contactos;
+    private TreeMap<String, Contacto>  misContactos;
     private int MAX_SIZE;
   
     //Constructor por defecto (tamaño 10 por defecto)
     public Agenda () {
-        this.contactos = new TreeMap<>();
+        this.misContactos = new TreeMap<>();
         this.MAX_SIZE = 10;
     }
   
     // Constructor: con tamaño personalizado del usuario
     public Agenda(int MAX_SIZE) {
-        this.contactos = new TreeMap<>();
+        this.misContactos = new TreeMap<>();
         this.MAX_SIZE = MAX_SIZE;
     }
 
@@ -52,8 +52,6 @@ public class Agenda {
             for (Contacto c : contactos.value()){
                 System.out.println(c);
             }
-        }
-
         }
     } //Cierre de metodo listar
 
