@@ -132,4 +132,19 @@ public class Agenda {
 
         return key;
     }
+
+    public String buscarContacto(String nombre) {
+        if (nombre == null || nombre.trim().isEmpty()) {
+            return null;
+        }
+
+        // Buscamos entre todos los contactos guardados
+        for (Contacto c : contactos.values()) {
+            if (c.getNombre().equalsIgnoreCase(nombre.trim())) {
+                return c.getNumero();
+            }
+        }
+
+        return null; // Si no lo encuentra
+    }
 } //Cierre de clase Agenda
