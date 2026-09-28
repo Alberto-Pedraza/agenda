@@ -54,4 +54,22 @@ public class Agenda {
         }
     } //Cierre de metodo listar
 
+    // Verifica si un contacto ya existe en la agenda
+    public boolean existeContacto(Contacto c) {
+
+        // Recorremos todos los contactos guardados
+        for (Contacto contactoGuardado : misContactos.values()) {
+
+            // Comparamos nombre y apellido ignorando mayúsculas/minúsculas
+            if (c.getNombre().equalsIgnoreCase(contactoGuardado.getNombre())
+                    && c.getApellido().equalsIgnoreCase(contactoGuardado.getApellido())) {
+
+                return true;
+            }
+        }
+
+        // Si terminó de buscar y no encontró coincidencias
+        return false;
+    }
+
 } //Cierre de clase Agenda
