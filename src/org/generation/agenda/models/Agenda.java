@@ -16,10 +16,9 @@ public class Agenda {
 
 
     public String updateContacto (){
-
         Scanner scanner = new Scanner(System.in);
         String keyName ;
-        String mensaje;
+        String mensaje = "";
         try {
             /*
             misContactos.put("DianaGarcia", new Contacto("Diana", "Garcia", 192832828));
@@ -30,8 +29,11 @@ public class Agenda {
             System.out.println("Ingresa el apellido del contacto que deseas modificar");
             String apellido = scanner.nextLine();
 
-            keyName = (nombre.trim()) + (apellido.trim());
+            if ((nombre==null || nombre.isEmpty())|| (apellido==null || apellido.isEmpty())) {
+                return "Error: Debes ingresar todos los datos";
+            }
 
+            keyName = this.createKey( nombre.trim() , apellido.trim() );
             Contacto contactoUpdate = misContactos.get(keyName);
             if(contactoUpdate !=null ){
                 System.out.println("Ingresa el nuevo nombre");
@@ -46,9 +48,9 @@ public class Agenda {
                 /* Actualizar listata Agenda */
                 misContactos.put(keyName, contactoUpdate);
                 mensaje = "Contacto actualizado \n"
-                +("\n contactoUpdate "+ contactoUpdate.getNombre())
-                +("\n contactoUpdate "+ contactoUpdate.getApellido())
-                +("\n contactoUpdate "+ contactoUpdate.getNumero());
+                +("\n Nombre "+ contactoUpdate.getNombre())
+                +("\n Apellido "+ contactoUpdate.getApellido())
+                +("\n Numero "+ contactoUpdate.getNumero());
             }else {
                 mensaje = ("El contacto no existe");
                 return mensaje;
@@ -59,4 +61,15 @@ public class Agenda {
         return mensaje;
     }
 
+    public String createKey (String nombre, String apellido) {
+        String key = "";
+        String nombreLetraMayuscula = nombre.substring(0, 1).toUpperCase();
+        String nombreLetrasMinuscula = nombre.substring(1).toLowerCase();
+        String apellidoLetraMayuscula = apellido.substring(0, 1).toUpperCase();
+        String apellidoLetrasMinuscula = apellido.substring(1).toLowerCase();
+
+        key = (nombreLetraMayuscula+nombreLetrasMinuscula) + (apellidoLetraMayuscula+apellidoLetrasMinuscula);
+
+        return key;
+    }
 } //Cierre de clase Agenda
