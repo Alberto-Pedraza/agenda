@@ -241,7 +241,7 @@ public class Main {
 
                 case 8:
                     // =========================================
-                    // OPCIÓN 9: UPDATE CONTACTO
+                    // OPCIÓN 8: UPDATE CONTACTO
                     // ========================================
                     String mensaje = "";
                     // 1. Pedimos el nombre y el Apellido
