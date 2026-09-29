@@ -117,9 +117,9 @@ public class Agenda {
         }
 
         // Buscamos entre todos los contactos guardados
-        for (Contacto c : contactos.values()) {
+        for (Contacto c : misContactos.values()) {
             if (c.getNombre().equalsIgnoreCase(nombre.trim())) {
-                return c.getNumero();
+                return String.valueOf(c.getNumero());
             }
         }
 
