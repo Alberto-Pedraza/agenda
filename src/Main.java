@@ -270,17 +270,23 @@ public class Main {
                         break;
                     }
 
-                    String telefonoEncontrado = agenda.buscarContacto(nombreBuscar);
+                    String apellidoBuscar = JOptionPane.showInputDialog("Ingresa el apellido del contacto que deseas buscar:");
+
+                    if (apellidoBuscar == null || apellidoBuscar.trim().isEmpty()) {
+                        break;
+                    }
+
+                    String telefonoEncontrado = agenda.buscarContacto(nombreBuscar, apellidoBuscar);
 
                     if (telefonoEncontrado != null) {
                         JOptionPane.showMessageDialog(
                                 null,
-                                "El teléfono de " + nombreBuscar + " es: " + telefonoEncontrado
+                                "El teléfono de " + nombreBuscar +" "+ apellidoBuscar + " es: " + telefonoEncontrado
                         );
                     } else {
                         JOptionPane.showMessageDialog(
                                 null,
-                                "No se encontró ningún contacto con el nombre: " + nombreBuscar
+                                "No se encontró ningún contacto con el nombre: " + nombreBuscar +" "+ apellidoBuscar
                         );
                     }
                     break;

@@ -106,19 +106,18 @@ public class Agenda {
         return key;
     }
 
-    public String buscarContacto(String nombre) {
-        if (nombre == null || nombre.trim().isEmpty()) {
+    public String buscarContacto(String nombre, String apellido) {
+        if (nombre+apellido == null || (nombre+apellido).trim().isEmpty()) {
             return null;
         }
 
-        // Buscamos entre todos los contactos guardados
-        for (Contacto c : misContactos.values()) {
-            if (c.getNombre().equalsIgnoreCase(nombre.trim())) {
-                return String.valueOf(c.getNumero());
-            }
+        String llave = createKey(nombre,apellido);
+        Contacto found = misContactos.get(llave);
+        if(found!= null){
+            return found.getNumero();
+        } else {
+            return null;
         }
-
-        return null; // Si no lo encuentra
     }
 
     public Contacto buscarContactoNombreApellido(String nombreApellido) {
