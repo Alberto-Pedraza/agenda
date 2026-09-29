@@ -35,11 +35,9 @@ public class Agenda {
         }
     } // Fin agendaLlena
 
-    //Metodo de espacios libres, recibe el treemap de contactos y el numero limite
-    //Ejemplo para imprimir
-    //System.out.println("Hay " + espaciosLibres(contactos, var_limite) + " espacio(s) disponible(s)");
-    public static int espaciosLibres(TreeMap<String, Contacto> contactos, int limite){
-        return limite - contactos.size();
+    //Metodo de espacios libres
+    public int espaciosLibres(){
+        return MAX_SIZE - misContactos.size();
     }
 
 
