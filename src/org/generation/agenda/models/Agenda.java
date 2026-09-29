@@ -29,7 +29,6 @@ public class Agenda {
     }
     public Boolean agendaLlena () {
         if (misContactos.size() == MAX_SIZE) {
-            System.out.println("No hay espacio disponible para nuevos contactos.");
             return true;
         } else {
             return false;
