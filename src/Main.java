@@ -29,7 +29,8 @@ public class Main {
                             "5. Eliminar contacto\n" +
                             "6. Comprobar si la agenda está llena\n" +
                             "7. Ver espacios disponibles\n" +
-                            "8. Salir";
+                            "8. Editar un contacto \n" +
+                            "9. Salir";
 
             // Pedimos una opción
             String entrada = JOptionPane.showInputDialog(menu);
@@ -185,6 +186,36 @@ public class Main {
 
                     break;
 
+                case 8:
+                    // =========================================
+                    // OPCIÓN 9: UPDATE CONTACTO
+                    // ========================================
+
+                    // 1. Pedimos el nombre y el Apellido
+                    String nombre = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas modificar:");
+                    String apellido = JOptionPane.showInputDialog("Ingresa el apellido del contacto que deseas modificar:");
+
+                    nombre= nombre.trim();
+                    apellido= apellido.trim();
+
+                    // 2. Validar datos ingresados
+                    if ((nombre==null || nombre.isEmpty())|| (apellido==null || apellido.isEmpty())) {
+                        JOptionPane.showMessageDialog(null,"Error: Debes ingresar todos los datos");
+                    } else {
+                        // 2. Validar si exite el registro en Agenda
+                        String keyName = agenda.createKey( nombre.trim() , apellido.trim() );
+
+                        String newNombre = JOptionPane.showInputDialog("Ingresa el nuevo nombre:");
+                        String newApellido = JOptionPane.showInputDialog("Ingresa el nuevo apellido:");
+                        String newTelefono = JOptionPane.showInputDialog("Ingresa el nuevo telefono:");
+                        Integer newTel = Integer.valueOf(newTelefono);
+
+                        // 3. Modificar registro y actualizar en agenda
+                        String mensaje = agenda.updateContacto(keyName,newNombre,newApellido,newTel);
+                        JOptionPane.showMessageDialog(null,mensaje);
+
+                    }
+                    break;
                 default:
 
                     JOptionPane.showMessageDialog(
@@ -193,6 +224,6 @@ public class Main {
                     );
             }
 
-        } while (opcion != 8);
+        } while (opcion != 9);
     }
 }
