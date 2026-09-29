@@ -68,20 +68,14 @@ public class Agenda {
     // Verifica si un contacto ya existe en la agenda
     public boolean existeContacto(Contacto c) {
 
-        // Recorremos todos los contactos guardados
-        for (Contacto contactoGuardado : misContactos.values()) {
+        // Creamos la clave usando el nombre y apellido del contacto
+        String key = createKey(c.getNombre(), c.getApellido());
 
-            // Comparamos nombre y apellido ignorando mayúsculas/minúsculas
-            if (c.getNombre().equalsIgnoreCase(contactoGuardado.getNombre())
-                    && c.getApellido().equalsIgnoreCase(contactoGuardado.getApellido())) {
-
-                return true;
-            }
-        }
-
-        // Si terminó de buscar y no encontró coincidencias
-        return false;
+        // Verificamos si esa clave ya existe en el TreeMap
+        return misContactos.containsKey(key);
     }
+
+
 
     public String updateContacto (String keyName, String newNombre,  String newApellido, String newTelefono){
         String mensaje = "";
