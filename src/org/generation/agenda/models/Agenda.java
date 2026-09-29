@@ -102,7 +102,7 @@ public class Agenda {
                 Integer newTelefono = scanner.nextInt();
 
                 /* Guardamos informacion  */
-                contactoUpdate = new Contacto(newNombre, newApellido, newTelefono);
+                contactoUpdate = new Contacto(newNombre, newApellido, String.valueOf(newTelefono));
                 /* Actualizar listata Agenda */
                 misContactos.put(keyName, contactoUpdate);
                 mensaje = "Contacto actualizado \n"
