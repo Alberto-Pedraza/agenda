@@ -49,7 +49,7 @@ public class Agenda {
         if(misContactos.isEmpty()){
             System.out.println("La agenda esta vacía");
         } else {
-            for (Contacto c : misContactos.value()){
+            for (Contacto c : misContactos.values()){
                 System.out.println(c);
             }
         }
@@ -137,9 +137,9 @@ public class Agenda {
         }
 
         // Buscamos entre todos los contactos guardados
-        for (Contacto c : contactos.values()) {
+        for (Contacto c : misContactos.values()) {
             if (c.getNombre().equalsIgnoreCase(nombre.trim())) {
-                return c.getNumero();
+                return String.valueOf(c.getNumero());
             }
         }
 

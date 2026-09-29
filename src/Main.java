@@ -1,12 +1,13 @@
 import javax.swing.JOptionPane;
 
+import org.generation.agenda.exceptions.InvalidData;
 import org.generation.agenda.models.Agenda;
 import org.generation.agenda.models.Contacto;
 
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InvalidData {
 
         // Creamos una agenda con capacidad
         // por defecto de 10 contactos.
@@ -140,7 +141,7 @@ public class Main {
                     Contacto nuevoContacto = new Contacto(
                             nombre,
                             apellidos,
-                            telefono
+                            Integer.parseInt(telefono)
                     );
 
                     // Revisamos si ya existe
@@ -162,7 +163,7 @@ public class Main {
                     } else {
 
                         // Agregamos contacto
-                        agenda.anadirContacto(nuevoContacto);
+                        agenda.añadirContacto(nuevoContacto);
 
                         JOptionPane.showMessageDialog(
                                 null,
