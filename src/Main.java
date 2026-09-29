@@ -359,8 +359,8 @@ public class Main {
                     // ========================================
                     String mensaje = "";
                     // 1. Pedimos el nombre y el Apellido
-                    String name = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas modificar:");
-                    String apellido = JOptionPane.showInputDialog("Ingresa el apellido del contacto que deseas modificar:");
+                    String name = JOptionPane.showInputDialog("Ingresa el nombre del contacto:");
+                    String apellido = JOptionPane.showInputDialog("Ingresa el apellido del contacto:");
 
                     name= name.trim();
                     apellido= apellido.trim();
@@ -373,12 +373,10 @@ public class Main {
                         String keyName = agenda.createKey( name.trim() , apellido.trim() );
                         Boolean exite = agenda.getExistContactoInMisContactos(keyName);
                         if(exite==true){
-                            String newNombre = JOptionPane.showInputDialog("Ingresa el nuevo nombre:");
-                            String newApellido = JOptionPane.showInputDialog("Ingresa el nuevo apellido:");
                             String newTelefono = JOptionPane.showInputDialog("Ingresa el nuevo telefono:");
 
                             // 3. Modificar registro y actualizar en agenda
-                            mensaje = agenda.updateContacto(keyName,newNombre,newApellido,newTelefono);
+                            mensaje = agenda.updateTelefono(keyName, newTelefono);
                         }else {
                             mensaje = "Error: El contacto no existe";
                         }

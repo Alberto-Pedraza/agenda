@@ -75,15 +75,15 @@ public class Agenda {
     }
 
 
-
-    public String updateContacto (String keyName, String newNombre,  String newApellido, String newTelefono){
+    public String updateTelefono (String keyName, String newTelefono){
         String mensaje = "";
         try {
                 /* Guardamos informacion  */
-                Contacto contactoUpdate = new Contacto(newNombre, newApellido, newTelefono);
+                Contacto contactoUpdate = misContactos.get(keyName);
+                contactoUpdate.setNumero(newTelefono);
                 /* Actualizar listata Agenda */
                 misContactos.put(keyName, contactoUpdate);
-                mensaje = "Contacto actualizado \n"
+                mensaje = "Numero actualizado actualizado"
                         +("\n Nombre "+ contactoUpdate.getNombre())
                         +("\n Apellido "+ contactoUpdate.getApellido())
                         +("\n Numero "+ contactoUpdate.getNumero());
