@@ -142,7 +142,7 @@ public class Main {
                     Contacto nuevoContacto = new Contacto(
                             nombre,
                             apellidos,
-                            Integer.parseInt(telefono)
+                            telefono
                     );
 
                     // Revisamos si ya existe
@@ -169,7 +169,7 @@ public class Main {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Contacto agregado correctamente.\n\n" +
-                                        nuevoContacto
+                                        nuevoContacto.getNombre()+"\n"+nuevoContacto.getApellido()+"\n"+nuevoContacto.getNumero()
                         );
                     }
 
@@ -246,7 +246,7 @@ public class Main {
 
                     JOptionPane.showMessageDialog(
                             null,
-                            "Opción todavía no implementada."
+                            "Opción no válida, ingrese una opción del menú."
                     );
             }
 
