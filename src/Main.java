@@ -324,6 +324,23 @@ public class Main {
                     }
 
                     break;
+                // OPCION 6: REVISAR SI LA AGENDA ESTÁ LLENA
+                case 6:
+                    if (agenda.agendaLlena()) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                        "La agenda está llena. No se pueden agregar nuevos contactos.\n"
+                        );
+
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "La agenda no está llena, se pueden agregar nuevos contactos.\n"
+                        );
+                    }
+
+                    break;
 
                 // =========================================
                 // OPCIÓN 7: VER ESPACIOS DISPONIBLES
