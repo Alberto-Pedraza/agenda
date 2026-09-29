@@ -82,7 +82,7 @@ public class Agenda {
             Contacto contactoUpdate = misContactos.get(keyName);
             if(contactoUpdate !=null ){
                 /* Guardamos informacion  */
-                contactoUpdate = new Contacto(newNombre, newApellido, newTelefono);
+                contactoUpdate = new Contacto(newNombre, newApellido, String.valueOf(newTelefono));
                 /* Actualizar listata Agenda */
                 misContactos.put(keyName, contactoUpdate);
                 mensaje = "Contacto actualizado \n"

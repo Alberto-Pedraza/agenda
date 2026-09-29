@@ -9,9 +9,30 @@ public class Main {
 
     public static void main(String[] args) throws InvalidData {
 
-        // Creamos una agenda con capacidad
-        // por defecto de 10 contactos.
-        Agenda agenda = new Agenda();
+        //Variable sin asignacion para decidir que objeto asignarle
+        Agenda agenda;
+
+        String respuesta = JOptionPane.showInputDialog(
+                "--- CONFIGURACIÓN INICIAL DE LA AGENDA ---\n\n" +
+                        "¿Deseas definir un tamaño máximo personalizado? (s/n):"
+        );
+
+        if (respuesta.equalsIgnoreCase("s")) {
+            String entrada = JOptionPane.showInputDialog(
+                    "Introduce el límite de contactos:"
+            );
+            int limite = Integer.parseInt(entrada);
+            agenda = new Agenda(limite);
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Agenda configurada con capacidad para " + limite + " contactos.");
+        } else {
+            agenda = new Agenda();
+            JOptionPane.showMessageDialog(
+                    null,
+                    "Configurada automáticamente con capacidad para 10 contactos."
+            );
+        }
 
         int opcion = 0;
 
@@ -173,6 +194,13 @@ public class Main {
                         );
                     }
 
+                    break;
+
+                // =========================================
+                // OPCIÓN 3: ENLISTAR CONTACTO
+                // =========================================
+                case 3:
+                    agenda.listarContactos();
                     break;
 
                 // =========================================
