@@ -238,47 +238,50 @@ public class Main {
                             "Hay " + espacios + " espacio(s) disponible(s)"
                     );
                     break;
-                // =========================================
-                // OPCIÓN 8: SALIR
-                // =========================================
-                case 8:
-
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "Saliendo de la agenda..."
-                    );
-
-                    break;
 
                 case 8:
                     // =========================================
                     // OPCIÓN 9: UPDATE CONTACTO
                     // ========================================
-
+                    String mensaje = "";
                     // 1. Pedimos el nombre y el Apellido
-                    String nombre = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas modificar:");
+                    String name = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas modificar:");
                     String apellido = JOptionPane.showInputDialog("Ingresa el apellido del contacto que deseas modificar:");
 
-                    nombre= nombre.trim();
+                    name= name.trim();
                     apellido= apellido.trim();
 
                     // 2. Validar datos ingresados
-                    if ((nombre==null || nombre.isEmpty())|| (apellido==null || apellido.isEmpty())) {
+                    if ((name==null || name.isEmpty())|| (apellido==null || apellido.isEmpty())) {
                         JOptionPane.showMessageDialog(null,"Error: Debes ingresar todos los datos");
                     } else {
                         // 2. Validar si exite el registro en Agenda
-                        String keyName = agenda.createKey( nombre.trim() , apellido.trim() );
+                        String keyName = agenda.createKey( name.trim() , apellido.trim() );
+                        Boolean exite = agenda.getExistContactoInMisContactos(keyName);
+                        if(exite==true){
+                            String newNombre = JOptionPane.showInputDialog("Ingresa el nuevo nombre:");
+                            String newApellido = JOptionPane.showInputDialog("Ingresa el nuevo apellido:");
+                            String newTelefono = JOptionPane.showInputDialog("Ingresa el nuevo telefono:");
 
-                        String newNombre = JOptionPane.showInputDialog("Ingresa el nuevo nombre:");
-                        String newApellido = JOptionPane.showInputDialog("Ingresa el nuevo apellido:");
-                        String newTelefono = JOptionPane.showInputDialog("Ingresa el nuevo telefono:");
-                        Integer newTel = Integer.valueOf(newTelefono);
-
-                        // 3. Modificar registro y actualizar en agenda
-                        String mensaje = agenda.updateContacto(keyName,newNombre,newApellido,newTel);
-                        JOptionPane.showMessageDialog(null,mensaje);
+                            // 3. Modificar registro y actualizar en agenda
+                            mensaje = agenda.updateContacto(keyName,newNombre,newApellido,newTelefono);
+                        }else {
+                            mensaje = "Error: El contacto no existe";
+                        }
+                            JOptionPane.showMessageDialog(null,mensaje);
 
                     }
+                    break;
+
+                case 9:
+                    // =========================================
+                    // OPCIÓN 9: SALIR
+                    // =========================================
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Saliendo de la agenda..."
+                    );
+
                     break;
                 default:
 

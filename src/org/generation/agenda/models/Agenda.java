@@ -71,28 +71,20 @@ public class Agenda {
         return false;
     }
 
-    public String updateContacto (String keyName, String newNombre,  String newApellido, Integer newTelefono){
+    public String updateContacto (String keyName, String newNombre,  String newApellido, String newTelefono){
         String mensaje = "";
         try {
-            /*misContactos.put("DianaGarcia", new Contacto("Diana", "Garcia", 192832828));
-            misContactos.put("AnaLopez", new Contacto("Ana", "Lopez", 192832828));
-            misContactos.put("ElitoDiaz", new Contacto("Eliot", "Diaz", 192832828));*/
-            Contacto contactoUpdate = misContactos.get(keyName);
-            if(contactoUpdate !=null ){
                 /* Guardamos informacion  */
-                contactoUpdate = new Contacto(newNombre, newApellido, String.valueOf(newTelefono));
+                Contacto contactoUpdate = new Contacto(newNombre, newApellido, newTelefono);
                 /* Actualizar listata Agenda */
                 misContactos.put(keyName, contactoUpdate);
                 mensaje = "Contacto actualizado \n"
                         +("\n Nombre "+ contactoUpdate.getNombre())
                         +("\n Apellido "+ contactoUpdate.getApellido())
                         +("\n Numero "+ contactoUpdate.getNumero());
-            }else {
-                mensaje = ("El contacto no existe");
-                return mensaje;
-            }
+
         } catch (InvalidData e) {
-            System.out.println("Error al crear mascotas " + e.getMessage());
+            System.out.println("Error al actualizar " + e.getMessage());
         }
         return mensaje;
     }
@@ -131,5 +123,10 @@ public class Agenda {
 
     public TreeMap<String, Contacto> getMisContactos() {
         return misContactos;
+    }
+
+    public Boolean getExistContactoInMisContactos (String keyName){
+        Contacto contacto = misContactos.get(keyName);
+        return ((contacto!=null) ? true : false);
     }
 } //Cierre de clase Agenda
