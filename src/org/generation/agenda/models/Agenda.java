@@ -23,11 +23,11 @@ public class Agenda {
     }
 
     public void eliminarContacto(String numero) {
-        misContactos.remove(numero);
+        contactos.remove(numero);
         System.out.println(String.format("Se elimino el contacto %s", numero));
     }
     public Boolean agendaLlena () {
-        if (misContactos.size() == MAX_SIZE) {
+        if (contactos.size() == MAX_SIZE) {
             System.out.println("No hay espacio disponible para nuevos contactos.");
             return true;
         } else {
@@ -49,19 +49,19 @@ public class Agenda {
         if(contactos.isEmpty()){
             System.out.println("La agenda esta vacía");
         } else {
-            for (Contacto c : contactos.value()){
+            for (Contacto c : contactos.values()){
                 System.out.println(c);
             }
         }
 
-        }
+        //}  //error de linea
     } //Cierre de metodo listar
 
     // Verifica si un contacto ya existe en la agenda
     public boolean existeContacto(Contacto c) {
 
         // Recorremos todos los contactos guardados
-        for (Contacto contactoGuardado : misContactos.values()) {
+        for (Contacto contactoGuardado : contactos.values()) {
 
             // Comparamos nombre y apellido ignorando mayúsculas/minúsculas
             if (c.getNombre().equalsIgnoreCase(contactoGuardado.getNombre())
@@ -94,19 +94,19 @@ public class Agenda {
             }
 
             keyName = this.createKey( nombre.trim() , apellido.trim() );
-            Contacto contactoUpdate = misContactos.get(keyName);
+            Contacto contactoUpdate = contactos.get(keyName);
             if(contactoUpdate !=null ){
                 System.out.println("Ingresa el nuevo nombre");
                 String newNombre = scanner.nextLine();
                 System.out.println("Ingresa el nuevo apellido");
                 String newApellido = scanner.nextLine();
                 System.out.println("Ingresa el nuevo telefono");
-                Integer newTelefono = scanner.nextInt();
+                String newTelefono = scanner.nextLine();
 
                 /* Guardamos informacion  */
                 contactoUpdate = new Contacto(newNombre, newApellido, newTelefono);
                 /* Actualizar listata Agenda */
-                misContactos.put(keyName, contactoUpdate);
+                contactos.put(keyName, contactoUpdate);
                 mensaje = "Contacto actualizado \n"
                 +("\n Nombre "+ contactoUpdate.getNombre())
                 +("\n Apellido "+ contactoUpdate.getApellido())

@@ -1,5 +1,6 @@
 import javax.swing.JOptionPane;
 
+import org.generation.agenda.exceptions.InvalidData;
 import org.generation.agenda.models.Agenda;
 import org.generation.agenda.models.Contacto;
 
@@ -136,43 +137,41 @@ public class Main {
                         break;
                     }
 
-                    // Creamos el contacto
-                    Contacto nuevoContacto = new Contacto(
-                            nombre,
-                            apellidos,
-                            telefono
-                    );
-
-                    // Revisamos si ya existe
-                    if (agenda.existeContacto(nuevoContacto)) {
-
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "El contacto ya existe."
+                    try {
+                        Contacto nuevoContacto = new Contacto(
+                                nombre,
+                                apellidos,
+                                telefono
                         );
 
-                    } else if (agenda.agendaLlena()) {
+                        // Revisamos si ya existe
+                        if (agenda.existeContacto(nuevoContacto)) {
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "El contacto ya existe."
+                            );
+                        } else if (agenda.agendaLlena()) {
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "No se puede agregar.\n" +
+                                            "La agenda está llena."
+                            );
+                        } else {
+                            // Agregamos contacto
+                            //agenda.anadirContacto(nuevoContacto);
 
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Contacto agregado correctamente.\n\n" +
+                                            nuevoContacto
+                            );
+                        }
+                    } catch (InvalidData e) {
                         JOptionPane.showMessageDialog(
                                 null,
-                                "No se puede agregar.\n" +
-                                        "La agenda está llena."
-                        );
-
-                    } else {
-
-                        // Agregamos contacto
-                        agenda.anadirContacto(nuevoContacto);
-
-                        JOptionPane.showMessageDialog(
-                                null,
-                                "Contacto agregado correctamente.\n\n" +
-                                        nuevoContacto
+                                "Error en los datos del contacto: " + e.getMessage()
                         );
                     }
-
-                    break;
-
                 // =========================================
                 // OPCIÓN 4: BUSCAR CONTACTO
                 // =========================================
