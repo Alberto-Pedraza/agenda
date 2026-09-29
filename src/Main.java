@@ -51,7 +51,8 @@ public class Main {
                             "5. Eliminar contacto\n" +
                             "6. Comprobar si la agenda está llena\n" +
                             "7. Ver espacios disponibles\n" +
-                            "8. Salir";
+                            "8. Editar un contacto \n" +
+                            "9. Salir";
 
             // Pedimos una opción
             String entrada = JOptionPane.showInputDialog(menu);
@@ -199,7 +200,7 @@ public class Main {
                 // OPCIÓN 3: ENLISTAR CONTACTO
                 // =========================================
                 case 3:
-                    agenda.listarContactos();
+                    JOptionPane.showMessageDialog(null, agenda.listarContactos());
                     break;
 
                 // =========================================
@@ -228,6 +229,46 @@ public class Main {
                     break;
 
                 // =========================================
+                // OPCIÓN 5: ELIMINAR CONTACTO
+                // =========================================
+                case 5:
+                    String contactoNombreEliminar = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas eliminar:");
+                    String contactoApellidoEliminar = JOptionPane.showInputDialog("Ingresa el apellido del contacto que deseas eliminar:");
+
+                    String contactoEliminar = contactoNombreEliminar + contactoApellidoEliminar;
+
+                    if (contactoEliminar == null || contactoEliminar.trim().isEmpty()) {
+                        break;
+                    }
+
+                    Contacto contactoEncontrado = agenda.buscarContactoNombreApellido(contactoEliminar);
+
+                    if (contactoEncontrado != null) {
+                        respuesta = JOptionPane.showInputDialog(
+                                null,
+                                "Estas seguro que quieres eliminar ese contacto (s/n):"
+                        );
+
+                        if (respuesta.equalsIgnoreCase("s")) {
+                            agenda.eliminarContacto(contactoEliminar);
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Se elimino el contacto.");
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Se cancelo la operacion.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "No se encontró ningún contacto con el nombre: " + contactoNombreEliminar + " " + contactoApellidoEliminar
+                        );
+                    }
+
+                    break;
+
+                // =========================================
                 // OPCIÓN 7: VER ESPACIOS DISPONIBLES
                 // =========================================
                 case 7:
@@ -237,18 +278,51 @@ public class Main {
                             "Hay " + espacios + " espacio(s) disponible(s)"
                     );
                     break;
-                // =========================================
-                // OPCIÓN 8: SALIR
-                // =========================================
-                case 8:
 
+                case 8:
+                    // =========================================
+                    // OPCIÓN 8: UPDATE CONTACTO
+                    // ========================================
+                    String mensaje = "";
+                    // 1. Pedimos el nombre y el Apellido
+                    String name = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas modificar:");
+                    String apellido = JOptionPane.showInputDialog("Ingresa el apellido del contacto que deseas modificar:");
+
+                    name= name.trim();
+                    apellido= apellido.trim();
+
+                    // 2. Validar datos ingresados
+                    if ((name==null || name.isEmpty())|| (apellido==null || apellido.isEmpty())) {
+                        JOptionPane.showMessageDialog(null,"Error: Debes ingresar todos los datos");
+                    } else {
+                        // 2. Validar si exite el registro en Agenda
+                        String keyName = agenda.createKey( name.trim() , apellido.trim() );
+                        Boolean exite = agenda.getExistContactoInMisContactos(keyName);
+                        if(exite==true){
+                            String newNombre = JOptionPane.showInputDialog("Ingresa el nuevo nombre:");
+                            String newApellido = JOptionPane.showInputDialog("Ingresa el nuevo apellido:");
+                            String newTelefono = JOptionPane.showInputDialog("Ingresa el nuevo telefono:");
+
+                            // 3. Modificar registro y actualizar en agenda
+                            mensaje = agenda.updateContacto(keyName,newNombre,newApellido,newTelefono);
+                        }else {
+                            mensaje = "Error: El contacto no existe";
+                        }
+                            JOptionPane.showMessageDialog(null,mensaje);
+
+                    }
+                    break;
+
+                case 9:
+                    // =========================================
+                    // OPCIÓN 9: SALIR
+                    // =========================================
                     JOptionPane.showMessageDialog(
                             null,
                             "Saliendo de la agenda..."
                     );
 
                     break;
-
                 default:
 
                     JOptionPane.showMessageDialog(
@@ -257,6 +331,6 @@ public class Main {
                     );
             }
 
-        } while (opcion != 8);
+        } while (opcion != 9);
     }
 }

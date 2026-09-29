@@ -22,8 +22,9 @@ public class Agenda {
         this.MAX_SIZE = MAX_SIZE;
     }
 
-    public void eliminarContacto(String numero) {
-        misContactos.remove(numero);
+    public void eliminarContacto(String nombreApellido) {
+        String numero = misContactos.get(nombreApellido).getNumero();
+        misContactos.remove(nombreApellido);
         System.out.println(String.format("Se elimino el contacto %s", numero));
     }
     public Boolean agendaLlena () {
@@ -42,15 +43,26 @@ public class Agenda {
 
 
     //Apertura de metodo listar contactos
-    public void listarContactos() {
+    public String listarContactos() {
+        StringBuilder listaContactos = new StringBuilder();
+
         System.out.println("LISTA DE CONTACTOS (ORDENADOS DE LA A - Z)");
         if(misContactos.isEmpty()){
-            System.out.println("La agenda esta vacía");
+            listaContactos.append("La agenda esta vacía");
+            System.out.println(listaContactos);
         } else {
+            int index = 1;
             for (Contacto c : misContactos.values()){
-                System.out.println(c);
+                listaContactos.append("=== Contacto ").append(index).append(" ===\n")
+                        .append(c.getNombre()).append("\n")
+                        .append(c.getApellido()).append("\n")
+                        .append(c.getNumero()).append("\n");
+                index++;
             }
+            System.out.println(listaContactos);
         }
+
+        return listaContactos.toString();
     } //Cierre de metodo listar
 
     // Verifica si un contacto ya existe en la agenda
@@ -65,48 +77,20 @@ public class Agenda {
 
 
 
-    public String updateContacto (){
-        Scanner scanner = new Scanner(System.in);
-        String keyName ;
+    public String updateContacto (String keyName, String newNombre,  String newApellido, String newTelefono){
         String mensaje = "";
         try {
-            /*
-            misContactos.put("DianaGarcia", new Contacto("Diana", "Garcia", 192832828));
-            misContactos.put("AnaLopez", new Contacto("Ana", "Lopez", 192832828));
-            misContactos.put("ElitoDiaz", new Contacto("Eliot", "Diaz", 192832828));*/
-            System.out.println("Ingresa el nombre del contacto que deseas modificar");
-            String nombre = scanner.nextLine();
-            System.out.println("Ingresa el apellido del contacto que deseas modificar");
-            String apellido = scanner.nextLine();
-
-            if ((nombre==null || nombre.isEmpty())|| (apellido==null || apellido.isEmpty())) {
-                return "Error: Debes ingresar todos los datos";
-            }
-
-            keyName = this.createKey( nombre.trim() , apellido.trim() );
-            Contacto contactoUpdate = misContactos.get(keyName);
-            if(contactoUpdate !=null ){
-                System.out.println("Ingresa el nuevo nombre");
-                String newNombre = scanner.nextLine();
-                System.out.println("Ingresa el nuevo apellido");
-                String newApellido = scanner.nextLine();
-                System.out.println("Ingresa el nuevo telefono");
-                Integer newTelefono = scanner.nextInt();
-
                 /* Guardamos informacion  */
-                contactoUpdate = new Contacto(newNombre, newApellido, String.valueOf(newTelefono));
+                Contacto contactoUpdate = new Contacto(newNombre, newApellido, newTelefono);
                 /* Actualizar listata Agenda */
                 misContactos.put(keyName, contactoUpdate);
                 mensaje = "Contacto actualizado \n"
-                +("\n Nombre "+ contactoUpdate.getNombre())
-                +("\n Apellido "+ contactoUpdate.getApellido())
-                +("\n Numero "+ contactoUpdate.getNumero());
-            }else {
-                mensaje = ("El contacto no existe");
-                return mensaje;
-            }
+                        +("\n Nombre "+ contactoUpdate.getNombre())
+                        +("\n Apellido "+ contactoUpdate.getApellido())
+                        +("\n Numero "+ contactoUpdate.getNumero());
+
         } catch (InvalidData e) {
-            throw new RuntimeException(e);
+            System.out.println("Error al actualizar " + e.getMessage());
         }
         return mensaje;
     }
@@ -138,6 +122,10 @@ public class Agenda {
         return null; // Si no lo encuentra
     }
 
+    public Contacto buscarContactoNombreApellido(String nombreApellido) {
+        return misContactos.get(nombreApellido);
+    }
+
     public void anadirContacto(Contacto nuevoContacto){
         String key = createKey(nuevoContacto.getNombre(),nuevoContacto.getApellido());
         this.misContactos.put(key,nuevoContacto);
@@ -145,5 +133,10 @@ public class Agenda {
 
     public TreeMap<String, Contacto> getMisContactos() {
         return misContactos;
+    }
+
+    public Boolean getExistContactoInMisContactos (String keyName){
+        Contacto contacto = misContactos.get(keyName);
+        return ((contacto!=null) ? true : false);
     }
 } //Cierre de clase Agenda
