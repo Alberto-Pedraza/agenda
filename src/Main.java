@@ -164,7 +164,7 @@ public class Main {
                     } else {
 
                         // Agregamos contacto
-                        agenda.añadirContacto(nuevoContacto);
+                        agenda.anadirContacto(nuevoContacto);
 
                         JOptionPane.showMessageDialog(
                                 null,
