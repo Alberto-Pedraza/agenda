@@ -66,10 +66,10 @@ public class Agenda {
     } //Cierre de metodo listar
 
     // Verifica si un contacto ya existe en la agenda
-    public boolean existeContacto(Contacto c) {
+    public boolean existeContacto(String nombre, String apellido) {
 
         // Creamos la clave usando el nombre y apellido del contacto
-        String key = createKey(c.getNombre(), c.getApellido());
+        String key = createKey(nombre, apellido);
 
         // Verificamos si esa clave ya existe en el TreeMap
         return misContactos.containsKey(key);

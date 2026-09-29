@@ -167,7 +167,7 @@ public class Main {
                     );
 
                     // Revisamos si ya existe
-                    if (agenda.existeContacto(nuevoContacto)) {
+                    if (agenda.existeContacto(nombre,apellidos)) {
 
                         JOptionPane.showMessageDialog(
                                 null,
@@ -194,6 +194,63 @@ public class Main {
                         );
                     }
 
+                    break;
+                // =========================================
+                // OPCIÓN 2: REVISAR SI EXISTE EL CONTACTO
+                // =========================================
+                case 2:
+                    // Pedimos el nombre
+                    String nombre1 = JOptionPane.showInputDialog(
+                            "Ingresa el nombre:"
+                    );
+
+                    // Si presiona cancelar
+                    if (nombre1 == null) {
+                        break;
+                    }
+
+                    // Validamos que no esté vacío
+                    if (nombre1.trim().isEmpty()) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "El nombre no puede estar vacío."
+                        );
+
+                        break;
+                    }
+
+                    // Pedimos los apellidos
+                    String apellidos1 = JOptionPane.showInputDialog(
+                            "Ingresa los apellidos:"
+                    );
+
+                    if (apellidos1 == null) {
+                        break;
+                    }
+
+                    // Validamos que no estén vacíos
+                    if (apellidos1.trim().isEmpty()) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Los apellidos no pueden estar vacíos."
+                        );
+
+                        break;
+                    }
+                    if (agenda.existeContacto(nombre1,apellidos1)) {
+
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "El contacto ya existe."
+                        );
+                    } else{
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "El contacto no existe en la agenda."
+                        );
+                    }
                     break;
 
                 // =========================================
