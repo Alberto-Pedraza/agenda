@@ -200,7 +200,7 @@ public class Main {
                 // OPCIÓN 3: ENLISTAR CONTACTO
                 // =========================================
                 case 3:
-                    agenda.listarContactos();
+                    JOptionPane.showMessageDialog(null, agenda.listarContactos());
                     break;
 
                 // =========================================
@@ -226,6 +226,46 @@ public class Main {
                                 "No se encontró ningún contacto con el nombre: " + nombreBuscar
                         );
                     }
+                    break;
+
+                // =========================================
+                // OPCIÓN 5: ELIMINAR CONTACTO
+                // =========================================
+                case 5:
+                    String contactoNombreEliminar = JOptionPane.showInputDialog("Ingresa el nombre del contacto que deseas eliminar:");
+                    String contactoApellidoEliminar = JOptionPane.showInputDialog("Ingresa el apellido del contacto que deseas eliminar:");
+
+                    String contactoEliminar = contactoNombreEliminar + contactoApellidoEliminar;
+
+                    if (contactoEliminar == null || contactoEliminar.trim().isEmpty()) {
+                        break;
+                    }
+
+                    Contacto contactoEncontrado = agenda.buscarContactoNombreApellido(contactoEliminar);
+
+                    if (contactoEncontrado != null) {
+                        respuesta = JOptionPane.showInputDialog(
+                                null,
+                                "Estas seguro que quieres eliminar ese contacto (s/n):"
+                        );
+
+                        if (respuesta.equalsIgnoreCase("s")) {
+                            agenda.eliminarContacto(contactoEliminar);
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Se elimino el contacto.");
+                        } else {
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Se cancelo la operacion.");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "No se encontró ningún contacto con el nombre: " + contactoNombreEliminar + " " + contactoApellidoEliminar
+                        );
+                    }
+
                     break;
 
                 // =========================================

@@ -22,8 +22,9 @@ public class Agenda {
         this.MAX_SIZE = MAX_SIZE;
     }
 
-    public void eliminarContacto(String numero) {
-        misContactos.remove(numero);
+    public void eliminarContacto(String nombreApellido) {
+        String numero = misContactos.get(nombreApellido).getNumero();
+        misContactos.remove(nombreApellido);
         System.out.println(String.format("Se elimino el contacto %s", numero));
     }
     public Boolean agendaLlena () {
@@ -42,15 +43,26 @@ public class Agenda {
 
 
     //Apertura de metodo listar contactos
-    public void listarContactos() {
+    public String listarContactos() {
+        StringBuilder listaContactos = new StringBuilder();
+
         System.out.println("LISTA DE CONTACTOS (ORDENADOS DE LA A - Z)");
         if(misContactos.isEmpty()){
-            System.out.println("La agenda esta vacía");
+            listaContactos.append("La agenda esta vacía");
+            System.out.println(listaContactos);
         } else {
+            int index = 1;
             for (Contacto c : misContactos.values()){
-                System.out.println(c);
+                listaContactos.append("=== Contacto ").append(index).append(" ===\n")
+                        .append(c.getNombre()).append("\n")
+                        .append(c.getApellido()).append("\n")
+                        .append(c.getNumero()).append("\n");
+                index++;
             }
+            System.out.println(listaContactos);
         }
+
+        return listaContactos.toString();
     } //Cierre de metodo listar
 
     // Verifica si un contacto ya existe en la agenda
@@ -114,6 +126,10 @@ public class Agenda {
         }
 
         return null; // Si no lo encuentra
+    }
+
+    public Contacto buscarContactoNombreApellido(String nombreApellido) {
+        return misContactos.get(nombreApellido);
     }
 
     public void anadirContacto(Contacto nuevoContacto){
