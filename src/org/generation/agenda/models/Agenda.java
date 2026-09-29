@@ -125,4 +125,13 @@ public class Agenda {
 
         return null; // Si no lo encuentra
     }
+
+    public void anadirContacto(Contacto nuevoContacto){
+        String key = createKey(nuevoContacto.getNombre(),nuevoContacto.getApellido());
+        this.misContactos.put(key,nuevoContacto);
+    }
+
+    public TreeMap<String, Contacto> getMisContactos() {
+        return misContactos;
+    }
 } //Cierre de clase Agenda
