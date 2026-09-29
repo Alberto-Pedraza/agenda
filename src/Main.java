@@ -229,6 +229,16 @@ public class Main {
                     break;
 
                 // =========================================
+                // OPCIÓN 7: VER ESPACIOS DISPONIBLES
+                // =========================================
+                case 7:
+                    int espacios = agenda.espaciosLibres();
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Hay " + espacios + " espacio(s) disponible(s)"
+                    );
+                    break;
+                // =========================================
                 // OPCIÓN 8: SALIR
                 // =========================================
                 case 8:
